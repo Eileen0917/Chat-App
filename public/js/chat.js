@@ -24,6 +24,8 @@ document.querySelector('#send-location').addEventListener('click', () => {
         socket.emit('sendLocation', {
             lat: position.coords.latitude,
             long: position.coords.longitude
+        }, (msg) => {
+            console.log(msg)
         })
     })
 })
