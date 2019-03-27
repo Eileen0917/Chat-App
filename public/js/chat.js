@@ -38,7 +38,7 @@ $messageForm.addEventListener('submit', (e) => {
     //disable form button
     $messageFormButton.setAttribute('disabled', 'disabled')
     
-    const msg = e.target.elements.msg.value
+    const msg = e.target.elements.message.value
 
     socket.emit('sendMsg', msg, (error) => {
         //enable form
@@ -71,4 +71,9 @@ $sendLocationButton.addEventListener('click', () => {
     })
 })
 
-socket.emit('join', { username, room })
+socket.emit('join', { username, room }, (error) => {
+    if (error) {
+        alert(error)
+        location.href = '/'
+    }
+})
