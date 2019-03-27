@@ -6,8 +6,10 @@ socket.on('message', (msg) => {
 
 document.querySelector('#msgForm').addEventListener('submit', (e) => {
     e.preventDefault()
-    const msg = e.target.elements.msg
-    socket.emit('sendMsg', msg)
+    const msg = e.target.elements.msg.value
+    socket.emit('sendMsg', msg, (message) => {
+        console.log('QQQQQQQ', message)
+    })
 })
 
 document.querySelector('#send-location').addEventListener('click', () => {

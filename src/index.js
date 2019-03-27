@@ -14,19 +14,20 @@ app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
     socket.emit('message', 'Welcome!')
-    socket.broadcast.emit('message', 'A new user joined!')
+    // socket.broadcast.emit('message', 'A new user joined!')
     
-    socket.on('sendMsg', (msg) => {
+    socket.on('sendMsg', (msg, callback) => {
         io.emit('message', msg)
+        callback('Delivered.')
     })
 
-    socket.on('disconnect', () => {
-        io.emit('message', 'A user has left.')
-    })
+    // socket.on('disconnect', () => {
+    //     io.emit('message', 'A user has left.')
+    // })
 
-    socket.on('sendLocation', (pos) => {
-        io.emit('message', `https://google.com/maps?q=${pos.lat},${pos.long}`)
-    })
+    // socket.on('sendLocation', (pos) => {
+    //     io.emit('message', `https://google.com/maps?q=${pos.lat},${pos.long}`)
+    // })
 })
 
 server.listen(port, () => {
